@@ -7,11 +7,9 @@ namespace EnDecryptWithJint
 {
     static class Encryptor
     {
-        public static string Key { get; private set; } = "8080808080808080";
-        public static string IV { get; private set; } = "8080808080808080";
-
-        private static byte[] _key { get; set; } = Encoding.UTF8.GetBytes(Key);
-        private static byte[] _iv { get; set; } = Encoding.UTF8.GetBytes(IV);
+        private static string key { get; set; } = "8080808080808080";
+        private static byte[] _key { get; set; } = Encoding.UTF8.GetBytes("8080808080808080");
+        private static byte[] _iv { get; set; } = Encoding.UTF8.GetBytes("8080808080808080");
 
         public static string EncryptString(string inputText)
         {

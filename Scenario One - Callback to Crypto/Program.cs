@@ -14,7 +14,7 @@ namespace EnDecryptWithJint
 
             Console.WriteLine($"Encrypted text: {encryptedText}");
 
-            var decryptedText = DecryptorJS.myGreetings(encryptedText, Encryptor.Key, Encryptor.IV);
+            var decryptedText = DecryptorJS.myGreetings(encryptedText);
 
             // For test
             //var decryptedText = Encryptor.DecryptString(encryptedText);
