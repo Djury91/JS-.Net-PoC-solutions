@@ -13,16 +13,22 @@ namespace EnDecryptWithJint
          * use in every step "engine.Execute(...here your script...)"
         */
         private static string jsSource { get; set; }
-            = $@"function decryptString(encryptedText)
+            = $@"function myGreetings(encryptedText)
+                 {{
+                     var decryptedtext = decryptString(encryptedText);
+                     return ""Greetings "" + decryptedtext + ""!"";
+                 }};
+                 
+                 function decryptString(encryptedText)
                  {{
                      var gKey = CryptoJS.enc.Utf8.parse(key);
 		             var gIV = CryptoJS.enc.Utf8.parse(iv);
                      var decryptedbytes = CryptoJS.AES.decrypt(encryptedText, gKey, {{iv: gIV}});
                      var decryptedtext = decryptedbytes.toString(CryptoJS.enc.Utf8);
-                     return ""Greetings "" + decryptedtext + ""!"";
+                     return decryptedtext ;
                  }};
                                   
-                 decryptString(encryptedText);";
+                 myGreetings(encryptedText);";
 
         public static string DecryptString(string encryptedText, string key, string iv)
         {
