@@ -20,7 +20,13 @@ namespace EnDecryptWithJint
         
             byte[] clearBytes = Encoding.Unicode.GetBytes(inputText);
             byte[] encryptedData = Encrypt(clearBytes, _key, _iv);
-            return Convert.ToBase64String(encryptedData);
+
+            var encryptedText = Convert.ToBase64String(encryptedData);
+
+            if (string.IsNullOrEmpty(encryptedText))
+                throw new ArgumentNullException("encryptedText");
+
+            return encryptedText;
         }
 
         private static byte[] Encrypt(byte[] clearData, byte[] Key, byte[] IV)
@@ -55,7 +61,13 @@ namespace EnDecryptWithJint
 
             byte[] cipherBytes = Convert.FromBase64String(encryptedText);
             byte[] decryptedData = Decrypt(cipherBytes, _key, _iv);
-            return Encoding.Unicode.GetString(decryptedData);
+
+            var decryptedText = Encoding.Unicode.GetString(decryptedData);
+
+            if (string.IsNullOrEmpty(decryptedText))
+                throw new ArgumentNullException("decryptedText");
+
+            return decryptedText;
         }
 
         private static byte[] Decrypt(byte[] cipherData, byte[] Key, byte[] IV)

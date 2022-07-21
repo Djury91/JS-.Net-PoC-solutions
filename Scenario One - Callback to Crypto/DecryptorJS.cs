@@ -30,7 +30,7 @@ namespace EnDecryptWithJint
                                   
                  myGreetings(encryptedText);";
 
-        public static string DecryptString(string encryptedText, string key, string iv)
+        public static string myGreetings(string encryptedText, string key, string iv)
         {
             if (string.IsNullOrEmpty(encryptedText))
                 throw new ArgumentNullException("encryptedText");
@@ -43,9 +43,14 @@ namespace EnDecryptWithJint
             engine.SetValue("encryptedText", encryptedText);
             engine.SetValue("key",  key);
             engine.SetValue("iv", iv);
-            var decryptedText = engine.Execute(jsSource).GetCompletionValue();
+            var result = engine.Execute(jsSource).GetCompletionValue();
 
-            return decryptedText.ToString();
+            var decryptedText = result.ToString();
+
+            if (string.IsNullOrEmpty(decryptedText))
+                throw new ArgumentNullException("decryptedText");
+
+            return decryptedText;
         }
     }
 }

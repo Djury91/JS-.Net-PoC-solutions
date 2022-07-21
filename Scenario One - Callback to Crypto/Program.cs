@@ -10,17 +10,11 @@ namespace EnDecryptWithJint
         {
             var encryptedText = Encryptor.EncryptString(inputText);
 
-            if(string.IsNullOrEmpty(encryptedText))
-                throw new ArgumentNullException("encryptedText");
-
             Console.WriteLine($"Origin text: {inputText}");
 
             Console.WriteLine($"Encrypted text: {encryptedText}");
 
-            var decryptedText = DecryptorJS.DecryptString(encryptedText, Encryptor.Key, Encryptor.IV);
-
-            if (string.IsNullOrEmpty(decryptedText))
-                throw new ArgumentNullException("decryptedText");
+            var decryptedText = DecryptorJS.myGreetings(encryptedText, Encryptor.Key, Encryptor.IV);
 
             // For test
             //var decryptedText = Encryptor.DecryptString(encryptedText);
