@@ -12,6 +12,8 @@ namespace EnDecryptWithJint
          * use function
          * use in every step "engine.Execute(...here your script...)"
         */
+
+        // Todo: using the script in a new js file
         private static string jsSource { get; set; }
             = $@"function myGreetings(encryptedText)
                  {{
