@@ -18,11 +18,6 @@ namespace HTTPCalls
         {
             var decryptedText = "";
             var mediaType = "text/plain";
-            //var parameters = new Dictionary<string, string>() { { "encryptedText", encryptedText } };
-
-            //var response = await client.PostAsync(myGreetingsUrl, new FormUrlEncodedContent(parameters));
-
-            //var decryptedText = await client.GetStringAsync(myGreetingsUrl);
 
             var request = new HttpRequestMessage
             {
@@ -31,8 +26,6 @@ namespace HTTPCalls
                 Content = new StringContent(encryptedText, Encoding.UTF8, mediaType),
 
             };
-
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             var response = await client.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HTTPCalls
+namespace Shared.Class
 {
     static class Encryptor
     {

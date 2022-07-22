@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTTPCalls", "HTTPCalls.cspr
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "MyNodeServer", "..\MyNodeServer\MyNodeServer.njsproj", "{05D695F0-C450-465E-BAC1-7E2044F8DB9F}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "..\Shared\Shared.shproj", "{FF87D6A5-937D-4554-99F4-2F1E5F515BD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTTPCallsViaJSEngine", "..\HTTPCallsViaJSEngine\HTTPCallsViaJSEngine.csproj", "{B98D0029-D21D-4B0C-9306-6DDF39823482}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,11 +25,20 @@ Global
 		{05D695F0-C450-465E-BAC1-7E2044F8DB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05D695F0-C450-465E-BAC1-7E2044F8DB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05D695F0-C450-465E-BAC1-7E2044F8DB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98D0029-D21D-4B0C-9306-6DDF39823482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98D0029-D21D-4B0C-9306-6DDF39823482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98D0029-D21D-4B0C-9306-6DDF39823482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98D0029-D21D-4B0C-9306-6DDF39823482}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1506C48-B65C-420A-B6B3-14C649E894A6}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Shared\Shared.projitems*{0b3bc8c8-5495-4577-b5eb-5b502b212ac3}*SharedItemsImports = 5
+		..\Shared\Shared.projitems*{b98d0029-d21d-4b0c-9306-6ddf39823482}*SharedItemsImports = 5
+		..\Shared\Shared.projitems*{ff87d6a5-937d-4554-99f4-2f1e5f515bd4}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

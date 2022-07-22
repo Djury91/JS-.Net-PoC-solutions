@@ -1,5 +1,4 @@
 var http = require("http"); // Import Node.js core module
-//var port = process.env.port || 1337;
 var greetings = require('./myGreetings');
 var port = 5000;
 
@@ -24,14 +23,7 @@ var server = http.createServer(function (req, res) { // creating server
                 console.log("decryptedText: " + decryptedText);
             }
         );
-
-        //res.writeHead(200, { "Content-Type": "text/plain" });
-        //res.write(decryptedText);
-        //res.end();
-        //console.log("decryption");
-        //console.log("decryptedText: " + decryptedText);
     }
-
 }).listen(port);
 
 // install nodejs
