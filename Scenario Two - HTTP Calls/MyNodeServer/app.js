@@ -1,6 +1,6 @@
 var http = require("http"); // Import Node.js core module
-var greetings = require("./myGreetings");
-//import { myGreetings } from "./myGreetings";
+//var port = process.env.port || 1337;
+var greetings = require('./myGreetings');
 var port = 5000;
 
 var server = http.createServer(function (req, res) { // creating server
@@ -16,15 +16,20 @@ var server = http.createServer(function (req, res) { // creating server
         req.on(
             "end", () => {
                 console.log("encryptedText: " + encryptedText);
+                decryptedText = greetings.myGreetings(encryptedText);
+
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.write(decryptedText);
+                res.end();
+                console.log("decryptedText: " + decryptedText);
             }
         );
 
-        //decryptedText = myGreetings(encryptedText);
-
-        res.writeHead(200, { "Content-Type": "text/plain" });
-        res.write(decryptedText);
-        res.end();
-        console.log("decryption")
+        //res.writeHead(200, { "Content-Type": "text/plain" });
+        //res.write(decryptedText);
+        //res.end();
+        //console.log("decryption");
+        //console.log("decryptedText: " + decryptedText);
     }
 
 }).listen(port);

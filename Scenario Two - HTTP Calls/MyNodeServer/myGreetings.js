@@ -1,27 +1,21 @@
-var crypto = require("crypto");
-//var cryptoJS = require("./crypto-v3.1.2");
+var cryptojs = require("./crypto-v3.1.2");
 
-export function myGreetings(encryptedText) {
-    var decryptedtext = "";
-    //decryptedtext = decryptString(encryptedText);
+function myGreetings(encryptedText) {
+    var decryptedtext = "default";
+    decryptedtext = decryptString(encryptedText);
     return "Greetings " + decryptedtext + "!";
 };
 
-export function decryptString(encryptedtext) {
-    var algorithm = "aes-256";
+module.exports.myGreetings = myGreetings;
+
+function decryptString(encryptedText) {
     var key = "8080808080808080";
-    //var _key = cryptoJS.enc.Utf8.parse(key);
-    //var _key = crypto.scryptSync(key, "", 16);//Buffer.from(key, 'utf-8');
-    //var _key = crypto.createHash(algorithm, key).digest();
-    //var _iv = crypto.createHash(algorithm, key).digest();
-    var decryptedText = "default";
+    var _key = cryptojs.CryptoJS.enc.Utf8.parse(key);
+    var _iv = _key;
+    var decryptedtext = "default";
 
-    //crypto.scryptSync(key, "", 16)
+    var decryptedbytes = cryptojs.CryptoJS.AES.decrypt(encryptedText, _key, { iv: _iv });
+    var decryptedtext = decryptedbytes.toString(cryptojs.CryptoJS.enc.Utf8);
 
-    //var decipher = crypto.createDecipheriv(algorithm, _key, _iv);
-    //var decryptedbuffer = decipher.update(encryptedtext);
-    //var decrypted = buffer.concat([decryptedbuffer, decipher.final("utf-8")]);
-    //decryptedText = decrypted.tostring();
-
-    return decryptedText;
+    return decryptedtext;
 };
