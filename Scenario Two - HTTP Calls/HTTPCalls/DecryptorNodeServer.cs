@@ -16,6 +16,9 @@ namespace HTTPCalls
 
         public static async Task<string> MyGreetings(string encryptedText)
         {
+            if (string.IsNullOrEmpty(encryptedText))
+                throw new ArgumentNullException("encryptedText");
+
             var decryptedText = "";
             var mediaType = "text/plain";
 
@@ -31,6 +34,9 @@ namespace HTTPCalls
             response.EnsureSuccessStatusCode();
 
             decryptedText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(decryptedText))
+                throw new ArgumentNullException("decryptedText");
 
             return decryptedText;
         }
