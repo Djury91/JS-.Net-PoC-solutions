@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace HTTPCalls
         public static async Task<string> MyGreetings(string encryptedText)
         {
             var decryptedText = "";
+            var mediaType = "text/plain";
             //var parameters = new Dictionary<string, string>() { { "encryptedText", encryptedText } };
 
             //var response = await client.PostAsync(myGreetingsUrl, new FormUrlEncodedContent(parameters));
@@ -26,8 +28,11 @@ namespace HTTPCalls
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(myGreetingsUrl),
-                Content = new StringContent(encryptedText, Encoding.UTF8),
+                Content = new StringContent(encryptedText, Encoding.UTF8, mediaType),
+
             };
+
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             var response = await client.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

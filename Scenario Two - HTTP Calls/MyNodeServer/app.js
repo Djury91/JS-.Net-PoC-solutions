@@ -1,9 +1,7 @@
-//import * as greetings from "./myGreetings"
-//var greetings = require("myGreetings.js");
 var http = require("http"); // Import Node.js core module
-var crypto = require('crypto');
-//const hostname = '127.0.0.1';
-//const port = 5858;
+var greetings = require("./myGreetings");
+//import { myGreetings } from "./myGreetings";
+var port = 5000;
 
 var server = http.createServer(function (req, res) { // creating server
     var encryptedText = "";
@@ -21,7 +19,7 @@ var server = http.createServer(function (req, res) { // creating server
             }
         );
 
-        decryptedText = myGreetings(encryptedText);
+        //decryptedText = myGreetings(encryptedText);
 
         res.writeHead(200, { "Content-Type": "text/plain" });
         res.write(decryptedText);
@@ -29,35 +27,7 @@ var server = http.createServer(function (req, res) { // creating server
         console.log("decryption")
     }
 
-}).listen(5000);
-
-
-function myGreetings(encryptedText) {
-    var decryptedtext = decryptString(encryptedText);
-    return "Greetings " + decryptedtext + "!";
-};
-
-function decryptString(encryptedtext) {
-    var algorithm = "sha256";
-    var key = "8080808080808080";
-    var _key = crypto.scryptSync(key, "", 16);//Buffer.from(key, 'utf-8');
-    //var _key = crypto.createHash(algorithm, key).digest();
-    var _iv = crypto.createHash(algorithm, key).digest();
-    var decryptedText = "default";
-
-    //crypto.scryptSync(key, "", 16)
-
-    //var decipher = crypto.createDecipheriv(algorithm, _key, _iv);
-    //var decryptedbuffer = decipher.update(encryptedtext);
-    //var decrypted = buffer.concat([decryptedbuffer, decipher.final("utf-8")]);
-    //decryptedText = decrypted.tostring();
-
-    return decryptedText;
-};
-
-//server.listen(port, hostname, () => {
-//    console.log(`Server running at http://${hostname}:${port}/`);
-//});
+}).listen(port);
 
 // install nodejs
 // to run single server.js file
