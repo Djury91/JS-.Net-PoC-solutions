@@ -1,16 +1,15 @@
-﻿function myGreetings(url, encryptedText) {
-    var method = "POST";
-    var request = new XMLHttpRequest();
-    request.open(method, url, true);
-    request.setRequestHeader("Content-Type", "text/plain");
-    request.send(encryptedText);
+﻿//var axios = require("./axios-v0.27.2");
 
-    if (request.status == 200) {
-        return request.responseText;
-    }
-    else {
-        return "default";
-    }
+function myGreetings(url, encryptedtext) {
+	var decryptedText = "Test Value";
+
+	axios.post(url, encryptedtext)
+	.then(res => {
+		return res.data;
+	})
+	.catch(err => {
+		console.log("err", err);
+	});
 }
 
-myGreetings(url, encryptedText);
+myGreetings(url, encryptedtext);

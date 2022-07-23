@@ -7,6 +7,7 @@ var server = http.createServer(function (req, res) { // creating server
     var decryptedText = "";
 
     if (req.url = "/mygreetings") {
+        console.log("decrypting...");
         req.on(
             "data", chunk => {
                 encryptedText += chunk;
@@ -17,14 +18,21 @@ var server = http.createServer(function (req, res) { // creating server
                 console.log("encryptedText: " + encryptedText);
                 decryptedText = greetings.myGreetings(encryptedText);
 
-                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.writeHead(200, {
+                    "Content-Type": "text/plain",
+                    "Access-Control-Allow-Origin": "*"
+                });
                 res.write(decryptedText);
                 res.end();
                 console.log("decryptedText: " + decryptedText);
             }
         );
     }
-}).listen(port);
+});
+
+server.listen(port); // listen for any incoming requests
+
+console.log('Node.js web server at port ' + port + ' is running...')
 
 // install nodejs
 // to run single server.js file
