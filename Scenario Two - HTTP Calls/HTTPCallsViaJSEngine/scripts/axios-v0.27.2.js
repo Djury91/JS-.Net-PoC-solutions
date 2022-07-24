@@ -2636,3 +2636,6 @@
     });
 });
 //# sourceMappingURL=axios.map
+
+//module.exports.axios = axios;
+//export default axios;
