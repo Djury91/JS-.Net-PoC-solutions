@@ -6,6 +6,8 @@ namespace CallbackToCrypto
 {
     public static class MyGreetings
     {
+        private static readonly string myGreetingsPath = "myGreetings.js";
+
         public static void Greetings(string encryptedText)
         {
             var engine = new Engine();
@@ -14,7 +16,7 @@ namespace CallbackToCrypto
             engine.SetValue("decryptString", new Func<string, string>(Encryptor.DecryptString));
             engine.SetValue("encryptedText", encryptedText);
 
-            var myGreetings = File.ReadAllText(@"myGreetings.js");
+            var myGreetings = File.ReadAllText(myGreetingsPath);
             engine.Execute(myGreetings);
         }
     }

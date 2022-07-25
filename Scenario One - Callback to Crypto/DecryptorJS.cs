@@ -33,6 +33,8 @@ namespace CallbackToCrypto
                                   
                  myGreetings(encryptedText);";
 
+        private static readonly string cryptoPath = "crypto-v3.1.2.js";
+
         public static string myGreetings(string encryptedText)
         {
             if (string.IsNullOrEmpty(encryptedText))
@@ -40,7 +42,7 @@ namespace CallbackToCrypto
 
             var engine = new Engine();
 
-            var cryptojs = File.ReadAllText(@"crypto-v3.1.2.js");
+            var cryptojs = File.ReadAllText(cryptoPath);
             engine.Execute(cryptojs);
 
             engine.SetValue("encryptedText", encryptedText);

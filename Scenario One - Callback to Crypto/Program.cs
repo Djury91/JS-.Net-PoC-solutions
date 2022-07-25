@@ -19,7 +19,7 @@ namespace CallbackToCrypto
 
             // For test
             //var decryptedText = Encryptor.DecryptString(encryptedText);
-            //Console.WriteLine($"DecryptedText text: {decryptedText}");
+            //Console.WriteLine($"DecryptedText: {decryptedText}");
 
             Console.ReadKey();
         }
