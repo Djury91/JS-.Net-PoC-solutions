@@ -2,7 +2,7 @@
 using System.IO;
 using Jint;
 
-namespace EnDecryptWithJint
+namespace CallbackToCrypto
 {
     public static class DecryptorJS
     {

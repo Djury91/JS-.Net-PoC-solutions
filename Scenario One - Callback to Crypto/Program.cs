@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EnDecryptWithJint
+namespace CallbackToCrypto
 {
     internal class Program
     {
@@ -14,11 +14,12 @@ namespace EnDecryptWithJint
 
             Console.WriteLine($"Encrypted text: {encryptedText}");
 
-            var decryptedText = DecryptorJS.myGreetings(encryptedText);
+            //var decryptedText = DecryptorJS.myGreetings(encryptedText);
+            MyGreetings.Greetings(encryptedText);
 
             // For test
             //var decryptedText = Encryptor.DecryptString(encryptedText);
-            Console.WriteLine($"DecryptedText text: {decryptedText}");
+            //Console.WriteLine($"DecryptedText text: {decryptedText}");
 
             Console.ReadKey();
         }
