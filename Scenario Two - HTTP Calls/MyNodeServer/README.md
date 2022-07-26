@@ -3,7 +3,7 @@ Nodejs installation is required.
 Latest LTS Version: **16.16.0**
 https://nodejs.org/en/download/
 
-## Scenario One - Callback to Crypto
+## Scenario Two -  HTTPCalls
 
 - We have a TS/JS library that contains a greeter function loads the data using a http call. (We could use a simple node server that returns the decrypted string)
 "*via a callback the function can decrypt the binary data using a native crypto library (that crypto lib can be mocked, better option would be to use a standard lib)
