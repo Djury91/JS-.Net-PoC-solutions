@@ -21,7 +21,8 @@ the function gets the decrypted value from the callback and returns the Hello ..
 # How to start
 >-  Install nodejs
 >-  Clone the repository
->-  Right click on the solution and check
+>-  Right click on the Solution(Set Startup Projects...) and check
+>       - Multiple startup project
 >		- MyNodeServer is set up to Start
 >		- HTTPCallsViaJSEngine is set up to Start
 > - "appV2.js" is set as Node,js Startup file (the name of the file is bold)
