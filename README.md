@@ -3,4 +3,3 @@
 ## Scenario Two -  Callback the Crypto
 
 ## Scenario Two -  HTTPCalls
-[read more...](/ScenarioTwo-HTTPCalls/)
