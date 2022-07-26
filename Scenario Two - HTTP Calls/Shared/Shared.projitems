@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Class\Encryptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\HTTPCalls.cs" />
   </ItemGroup>
 </Project>

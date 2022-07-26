@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.ClearScript.V8;
 using System.IO;
-using Microsoft.ClearScript;
-using Microsoft.ClearScript.JavaScript;
 using System.Threading.Tasks;
 using Shared.Class;
 

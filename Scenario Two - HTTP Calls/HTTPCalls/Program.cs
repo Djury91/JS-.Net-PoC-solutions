@@ -16,7 +16,8 @@ namespace HTTPCalls
             var encryptedText = Encryptor.EncryptString(inputText);
             Console.WriteLine($"Encrypted text: {encryptedText}");
 
-            var decryptedText = await DecryptorNodeServer.MyGreetings(encryptedText);
+            Shared.Class.HTTPCalls.ApiUrl = "http://localhost:5000/mygreetings";
+            var decryptedText = await Shared.Class.HTTPCalls.MyGreetingsPost(encryptedText);
             Console.WriteLine($"DecryptedText text: {decryptedText}");
 
             Console.ReadKey();

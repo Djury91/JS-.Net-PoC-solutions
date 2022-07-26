@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HTTPCallsViaJSEngine
+namespace Shared.Class
 {
     public static class HTTPCalls
     {
@@ -14,10 +14,20 @@ namespace HTTPCallsViaJSEngine
 
         private static readonly HttpClient client = new HttpClient();
 
+        
+        public static async Task<string> MyGreetingsPost(string encryptedText)
+        {
+            EncryptedText = encryptedText;
+
+            var decryptedText = await MyGreetingsPost();
+
+            return decryptedText;
+        }
+
         public static async Task<string> MyGreetingsPost()
         {
             if (string.IsNullOrEmpty(EncryptedText))
-                throw new ArgumentNullException("encryptedText");
+                throw new ArgumentNullException("EncryptedText");
 
             var decryptedText = "";
             var mediaType = "text/plain";
