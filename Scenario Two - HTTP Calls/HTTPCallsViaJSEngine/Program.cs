@@ -14,8 +14,8 @@ namespace HTTPCallsViaJSEngine
             var encryptedText = Encryptor.EncryptString(inputText);
             Console.WriteLine($"Encrypted text: {encryptedText}");
 
-            var decryptedText = DecryptorJS.MyGreetings(encryptedText);
-            Console.WriteLine($"DecryptedText text: {decryptedText}");
+            HTTPCalls.EncryptedText = encryptedText;
+            MyGreetings.Greetings();
 
             Console.ReadKey();
         }

@@ -15,7 +15,7 @@
     <None Update="scripts\axios-v0.27.2.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="scripts\HTTPCalls.js">
+    <None Update="scripts\myGreetings.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
