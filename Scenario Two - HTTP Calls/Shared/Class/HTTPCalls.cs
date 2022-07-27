@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Shared.Class
@@ -27,7 +28,7 @@ namespace Shared.Class
         public static async Task<string> MyGreetingsPost()
         {
             if (string.IsNullOrEmpty(EncryptedText))
-                throw new ArgumentNullException("EncryptedText");
+                Console.WriteLine($"The EncryptedText can not be empty or null! The value: {EncryptedText}");
 
             var decryptedText = "";
             var mediaType = "text/plain";
@@ -40,13 +41,48 @@ namespace Shared.Class
 
             };
 
-            var response = await client.SendAsync(request).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+
+            var retryNum = 0;
+            var response = new HttpResponseMessage();
+            var success = false;
+
+            do
+            {
+                try
+                {
+                    // ConfigureAwait(false)
+                    // using in library code
+                    // improving performance, avoiding deddlocks
+                    // https://devblogs.microsoft.com/dotnet/configureawait-faq/
+                    response = await client.SendAsync(request).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Send request and catch error!!! " + e.Message);
+                }
+
+                success = response.IsSuccessStatusCode;
+
+                if (!success)
+                {
+                    retryNum++;
+
+                    if (retryNum >= 3)
+                    {
+                        success = true;
+                        Console.WriteLine("It could not send the request.");
+                    }
+                    else
+                        Thread.Sleep(300);
+                }
+
+            } while (!success);
+            
 
             decryptedText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(decryptedText))
-                throw new ArgumentNullException("decryptedText");
+                Console.WriteLine($"The decryptedText can not be empty or null! The value: {decryptedText}");
 
             return decryptedText;
         }
