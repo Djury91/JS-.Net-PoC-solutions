@@ -17,12 +17,21 @@ namespace SharedState.API
 
             if (engine == null)
                 Console.WriteLine("V8ScriptEngine instance error!");
-            
-            var myGreetings = File.ReadAllText(myGreetingsJSPath);
-            engine.AddHostObject("myGreetingsGetAsync", new Func<Task<string>>(HTTPCall.MyGreetingsGetAsync));
-            engine.AddHostObject("decryptString", new Func<string, string>(CryptoHelper.DecryptString));
-            engine.AddHostObject("log", new Action<string>(Console.WriteLine));
-            engine.Execute(myGreetings);
+
+            try
+            {
+                var myGreetings = File.ReadAllText(myGreetingsJSPath);
+                engine.AddHostObject("myGreetingsGetAsync", new Func<Task<string>>(HTTPCall.MyGreetingsGetAsync));
+                engine.AddHostObject("decryptString", new Func<string, string>(CryptoHelper.DecryptString));
+                engine.AddHostObject("log", new Action<string>(Console.WriteLine));
+                engine.AddHostObject("insertLog2MySQLite", new Action<string>(SQLiteHelper.InsertLog));
+                engine.Execute(myGreetings);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"V8ScriptEngine error msg: {ex.Message}");
+            }
         }
     }
 }

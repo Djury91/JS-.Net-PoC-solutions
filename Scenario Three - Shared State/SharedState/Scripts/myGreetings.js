@@ -11,6 +11,7 @@ function myGreetings() {
 	}
 
 	log(msg);
+	insertLog2MySQLite(msg);
 }
 
 myGreetings();

@@ -1,5 +1,6 @@
 ﻿using SharedState.API;
 using SharedState.Helpers;
+using SharedState.SQLite;
 using System;
 
 namespace SharedState
@@ -10,6 +11,11 @@ namespace SharedState
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Create SQLite connection...");
+
+            SQLiteHelper.CreateSQLiteConnection();
+            Console.WriteLine("Done!\n");
+
             Console.WriteLine($"Origin text: {inputText}");
 
             var encryptedText = CryptoHelper.EncryptString(inputText);
