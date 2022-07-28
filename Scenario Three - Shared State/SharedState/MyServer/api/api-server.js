@@ -1,10 +1,10 @@
 const express = require('express');
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); //4.16+
 const port = 1773
 
-app.get('/hello', (req, res) => {
+app.get("/hello", (req, res) => {
     //let name = req.query.name ?? "nobody";
     //let message = req.query.message ?? "This is default message";
 
@@ -15,7 +15,13 @@ app.get('/hello', (req, res) => {
     //    "name": name,
     //    "message": message
     //});
-    res.send(req.body);
+    if (req.body) {
+        res.send(req.body);
+    }
+    else {
+        res.status(500).json({name: "Error", message: ""});
+    }
+    res.end();
 
 
 })

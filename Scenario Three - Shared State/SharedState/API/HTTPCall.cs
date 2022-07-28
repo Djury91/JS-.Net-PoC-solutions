@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using System.Threading;
 
 namespace SharedState.API
 {
@@ -36,7 +37,6 @@ namespace SharedState.API
                 };
 
                 var jsonString = JsonConverter.ContentSerializer(myContent);
-
                 var mediaType = "application/json";
 
                 var request = new HttpRequestMessage
@@ -48,16 +48,23 @@ namespace SharedState.API
                 };
 
                 var response = await client.SendAsync(request).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
-                
-                var responseJSON = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                var message = JsonConverter.ContentDeserializer(responseJSON).Message;
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var responseJSON = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                if (string.IsNullOrEmpty(message))
-                    Console.WriteLine($"The response measge is not correct, the message: {message}");
+                    var message = JsonConverter.ContentDeserializer(responseJSON).Message;
 
-                return message;
+                    if (string.IsNullOrEmpty(message))
+                        Console.WriteLine($"The response measge is not correct, the message: {message}");
+
+                    return message;
+                }
+                else
+                {
+                   Console.WriteLine($"HTTP Client error response! Status code: {response.StatusCode}");
+                    return null;
+                }
             }
             catch (Exception ex)
             {
