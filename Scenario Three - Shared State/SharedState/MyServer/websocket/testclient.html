@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testclient</title>
+</head>
+<body>
+<p>Nothing here, open console.</p>
+<script>
+    const ws = new WebSocket('ws://localhost:8083');
+    ws.onopen = function () {
+        console.log('open');
+        ws.send('test');
+    };
+
+    ws.onmessage = function (e) {
+        console.log(e.data);
+    };
+
+    ws.onclose = function () {
+        console.log('close');
+    };
+
+    ws.onerror = function (error) {
+        console.log(error)
+    }
+</script>
+</body>
+</html>

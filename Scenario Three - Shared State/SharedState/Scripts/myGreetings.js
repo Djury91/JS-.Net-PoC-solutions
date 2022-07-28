@@ -1,8 +1,15 @@
 function myGreetings() {
-	var response = myGreetingsPost().Result;
+	var msg = "";
+	var response = myGreetingsGetAsync().Result;
 
-	var decryptedText = decryptString(response);
-	var msg = "decrypted text: Greetings " + decryptedText + "!";
+	if (response) {
+		var decryptedText = decryptString(response);
+		var msg = "from js - decrypted text: Greetings " + decryptedText + "!";
+	}
+    else {
+		msg = "from js: Response can npt be null!";
+	}
+
 	log(msg);
 }
 

@@ -1,0 +1,17 @@
+{
+  "name": "slcpoc-backend",
+  "version": "1.0.0",
+  "description": "Backend for Single Language Codebase POC",
+  "scripts": {
+    "start": "concurrently --kill-others \"npm run ws-server\" \"npm run api-server\"",
+    "ws-server": "node websocket/ws-server.js",
+    "api-server": "node api/api-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "ws": "8.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0"
+  }
+}

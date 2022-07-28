@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
 
 namespace SharedState.API
 {
@@ -10,45 +11,60 @@ namespace SharedState.API
     {
         public static string EncryptedText { private get; set; } = "";
 
-        public static string ApiUrl { private get; set; } = "http://127.0.0.1:4010/hello";
-
-        private static readonly HttpClient client = new HttpClient();
+        public static string ApiUrl { private get; set; } = "http://localhost:1773/hello";
 
 
-        public static async Task<string> MyGreetingsPost(string encryptedText)
-        {
-            EncryptedText = encryptedText;
-
-            var decryptedText = await MyGreetingsPost();
-
-            return decryptedText;
-        }
-
-        public static async Task<string> MyGreetingsPost()
+        public static async Task<string> MyGreetingsGetAsync()
         {
             if (string.IsNullOrEmpty(EncryptedText))
-                throw new ArgumentNullException("EncryptedText");
+                Console.WriteLine($"The encryptedText can not be null neither empty, the text: {EncryptedText}");
 
-            var decryptedText = "";
-            var mediaType = "text/plain";
-
-            var request = new HttpRequestMessage
+            try
             {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(ApiUrl),
-                Content = new StringContent(EncryptedText, Encoding.UTF8, mediaType),
+                using var client = new HttpClient();
 
-            };
+                if (client == null)
+                {
+                    Console.WriteLine("HTTP Client instance error!");
+                    return null;
+                }
 
-            var response = await client.SendAsync(request).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+                var myContent = new Content()
+                {
+                    Name = "Gyuri",
+                    Message = EncryptedText
+                };
 
-            decryptedText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var jsonString = JsonConverter.ContentSerializer(myContent);
 
-            if (string.IsNullOrEmpty(decryptedText))
-                throw new ArgumentNullException("decryptedText");
+                var mediaType = "application/json";
 
-            return decryptedText;
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(ApiUrl),
+                    Content = new StringContent(jsonString, Encoding.UTF8, mediaType),
+
+                };
+
+                var response = await client.SendAsync(request).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                
+                var responseJSON = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var message = JsonConverter.ContentDeserializer(responseJSON).Message;
+
+                if (string.IsNullOrEmpty(message))
+                    Console.WriteLine($"The response measge is not correct, the message: {message}");
+
+                return message;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"HTTP Client Error: {ex.Message}");
+                return null;
+            }
         }
     }
 }
