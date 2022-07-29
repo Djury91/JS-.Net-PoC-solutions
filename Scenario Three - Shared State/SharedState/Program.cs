@@ -24,6 +24,9 @@ namespace SharedState
             HTTPCall.EncryptedText = encryptedText;
             MyGreetings.Greetings();
 
+            Console.WriteLine();
+            SQLiteHelper.DisplayLog();
+
             Console.ReadKey();
         }
     }
