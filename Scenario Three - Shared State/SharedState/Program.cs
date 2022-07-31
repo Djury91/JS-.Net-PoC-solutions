@@ -2,6 +2,7 @@
 using SharedState.Helpers;
 using SharedState.SQLite;
 using System;
+using System.Threading.Tasks;
 
 namespace SharedState
 {
@@ -25,7 +26,7 @@ namespace SharedState
             MyGreetings.Greetings();
 
             Console.WriteLine();
-            SQLiteHelper.DisplayLog();
+            Task.Run(() => SQLiteHelper.DisplayLog()).Wait();
 
             Console.ReadKey();
         }

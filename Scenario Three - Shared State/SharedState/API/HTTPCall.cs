@@ -18,59 +18,50 @@ namespace SharedState.API
         public static async Task<string> MyGreetingsGetAsync()
         {
             if (string.IsNullOrEmpty(EncryptedText))
-                Console.WriteLine($"The encryptedText can not be null neither empty, the text: {EncryptedText}");
+                throw new NullReferenceException($"The encryptedText can not be null neither empty, the text: {EncryptedText}");
 
-            try
+            using var client = new HttpClient();
+
+            if (client == null)
+                throw new ArgumentNullException("HTTP Client error!");
+
+            Console.WriteLine($"HTTP Get - {ApiUrl} ...");
+
+            var myContent = new Content()
             {
-                using var client = new HttpClient();
+                Name = "Gyuri",
+                Message = EncryptedText
+            };
 
-                if (client == null)
-                {
-                    Console.WriteLine("HTTP Client instance error!");
-                    return null;
-                }
+            var jsonString = JsonConverter.ContentSerializer(myContent);
+            // for test
+            //jsonString = @"{"""",""""}";
+            var mediaType = "application/json";
 
-                var myContent = new Content()
-                {
-                    Name = "Gyuri",
-                    Message = EncryptedText
-                };
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiUrl),
+                Content = new StringContent(jsonString, Encoding.UTF8, mediaType),
 
-                var jsonString = JsonConverter.ContentSerializer(myContent);
-                var mediaType = "application/json";
+            };
 
-                var request = new HttpRequestMessage
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri(ApiUrl),
-                    Content = new StringContent(jsonString, Encoding.UTF8, mediaType),
+            var response = await client.SendAsync(request).ConfigureAwait(false);
 
-                };
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var responseJSON = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                var response = await client.SendAsync(request).ConfigureAwait(false);
+                var message = JsonConverter.ContentDeserializer(responseJSON).Message;
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var responseJSON = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (string.IsNullOrEmpty(message))
+                    throw new NullReferenceException($"The response measge is not correct, the message: {message}");
 
-                    var message = JsonConverter.ContentDeserializer(responseJSON).Message;
-
-                    if (string.IsNullOrEmpty(message))
-                        Console.WriteLine($"The response measge is not correct, the message: {message}");
-
-                    return message;
-                }
-                else
-                {
-                   Console.WriteLine($"HTTP Client error response! Status code: {response.StatusCode}");
-                    return null;
-                }
+                return message;
             }
-            catch (Exception ex)
+            else
             {
-
-                Console.WriteLine($"HTTP Client Error: {ex.Message}");
-                return null;
+                throw new Exception($"HTTP Client error response! Status code: {response.StatusCode}");
             }
         }
     }

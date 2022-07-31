@@ -5,25 +5,23 @@ app.use(express.json()); //4.16+
 const port = 1773
 
 app.get("/hello", (req, res) => {
-    //let name = req.query.name ?? "nobody";
-    //let message = req.query.message ?? "This is default message";
 
-    //console.log("query: "+ req.query);
-    //console.log(name + "," + message);
+    res.append("Content-Type", "application/json; charset=UTF-8");
+    res.append("Access-Control-Allow-Origin", "*");
 
-    //res.json({
-    //    "name": name,
-    //    "message": message
-    //});
     if (req.body) {
-        res.send(req.body);
+        res.status(200).json(req.body);
     }
     else {
-        res.status(500).json({name: "Error", message: ""});
+        res.status(500)
+            .json(
+            {
+                name: "Error",
+                message: "Invalid message!"
+            });
     }
+
     res.end();
-
-
 })
 
 app.listen(port, function () {

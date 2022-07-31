@@ -32,12 +32,13 @@ namespace SharedState.Helpers
             Task.Run(() => myDatabase.InsertData(insertData, parameters)).Wait();
         }
 
-        public static List<LogTable> ReadLog() 
-            => Task.Run(() => myDatabase.ReadLogData()).Result;
+        public static async Task<List<LogTable>> ReadLog() 
+            => await Task.Run(() => myDatabase.ReadLogData());
+        
 
-        public static void DisplayLog()
+        public static async void DisplayLog()
         {
-            var logs = ReadLog();
+            var logs = await ReadLog();
 
             if (logs == null)
                 Console.WriteLine("Error! Log Data is null!");
@@ -47,6 +48,7 @@ namespace SharedState.Helpers
                 {
                     Console.WriteLine($"{log.Log_Id,-6} {log.Name,-12} {log.Message,-56} {log.LoadDate,-8} {log.LoadTime,-8}");
                 }
+
                 Console.WriteLine(string.Concat(Enumerable.Repeat("===", 3)));
                 Console.WriteLine($"Count: {logs.Count}");
             }
