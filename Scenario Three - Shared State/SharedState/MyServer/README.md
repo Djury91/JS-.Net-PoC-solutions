@@ -1,5 +1,5 @@
 Prerequisites
-- Node.js
+- Node.js [Download](https://nodejs.org/en/download/ "Download")
 
 Download dependencies
 ```bash
@@ -8,5 +8,5 @@ npm install
 
 Start backend servers
 ```bash
-npm start
+npm run api-server
 ```
