@@ -1,5 +1,5 @@
 Prerequisites
-- Node.js [Download](https://nodejs.org/en/download/ "Download")
+- Node.js [Download](https://nodejs.org/en/download "Download")
 
 Download dependencies
 ```bash
