@@ -3,3 +3,6 @@ Add a repository to the native app that stores the greetings returned by every c
 
 ## Prerequisite
 Please go to [MyServer](https://github.com/Djury91/JS-.Net-PoC-solutions/tree/ScenarioThree-ScharedState/Scenario%20Three%20-%20Shared%20State/SharedState/MyServer "MyServer") folder and see the description.
+
+## ClearScript
+You can find description about [ClearScipt V8](https://github.com/microsoft/ClearScript "ClearScript") JavaScript engine.
